@@ -9,16 +9,41 @@
 <body>
     <div class="container">
         <h1>生产日期编码生成器</h1>
+        
+        <div class="product-type-section">
+            <label>选择产品类型:</label>
+            <div class="product-buttons">
+                <button class="product-btn" data-type="SCC">SCC</button>
+                <button class="product-btn" data-type="HCC">HCC</button>
+                <button class="product-btn" data-type="SCAP">SCAP</button>
+                <button class="product-btn" data-type="HCAP">HCAP</button>
+            </div>
+            <div class="selected-product" id="selectedProduct">未选择</div>
+        </div>
+
         <div class="input-section">
             <label for="dateInput">请输入生产日期 (YYYYMMDD):</label>
             <input type="text" id="dateInput" placeholder="例如: 20251208" maxlength="8">
-            <button id="generateBtn">生成编码</button>
+            <button id="generateBtn">生成单个编码</button>
+        </div>
+
+        <div class="batch-section">
+            <label for="quantityInput">生产数量 (1-5000):</label>
+            <input type="number" id="quantityInput" placeholder="例如: 1000" min="1" max="5000">
+            <button id="batchGenerateBtn">批量生成编码</button>
         </div>
         
         <div class="result-section" id="resultSection" style="display: none;">
             <h2>生成的编码:</h2>
             <div class="output" id="output"></div>
             <button id="copyBtn">复制编码</button>
+            <button id="downloadBtn" style="display: none;">下载批量编码</button>
+        </div>
+
+        <div class="batch-result-section" id="batchResultSection" style="display: none;">
+            <h2>批量生成结果:</h2>
+            <div class="batch-output" id="batchOutput"></div>
+            <button id="downloadBatchBtn">下载批量编码表格</button>
         </div>
 
         <div class="error-section" id="errorSection" style="display: none;">
