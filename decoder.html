@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生产日期解码器 - Feaglet原厂编码验证</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Feaglet原厂编码验证</h1>
+        
+        <div class="input-section">
+            <label for="codeInput">请输入产品编码:</label>
+            <input type="text" id="codeInput" placeholder="例如: SK-SCAP-25A-H18C0002 或 SKSCAP25AH18C" maxlength="20">
+            <button id="decodeBtn">解码验证</button>
+        </div>
+
+        <div class="result-section" id="resultSection" style="display: none;">
+            <h2>解码结果:</h2>
+            <div class="output" id="output"></div>
+            <div class="warranty-info" id="warrantyInfo"></div>
+            <div class="warning-info" id="warningInfo"></div>
+        </div>
+
+        <div class="error-section" id="errorSection" style="display: none;">
+            <p class="error-message" id="errorMessage"></p>
+        </div>
+
+        <div class="instructions">
+            <h3>使用说明:</h3>
+            <ul>
+                <li>支持多种编码格式:</li>
+                <li>- SK-SCAP-25A-H18C0002 (完整格式)</li>
+                <li>- SK-SCAP-25A-H18C (无序列号)</li>
+                <li>- SKSCAP25AH18C0002 (无分隔符)</li>
+                <li>- SKSCAP25AH18C (无分隔符无序列号)</li>
+                <li>SCAP/HCAP质保期限: 420天</li>
+                <li>SCC/HCC质保期限: 360天</li>
+                <li>自动验证编码合法性并显示质保状态</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="decoder.js"></script>
+</body>
+</html>
