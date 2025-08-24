@@ -1,0 +1,200 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.input-section {
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #555;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+#dateInput {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease;
+}
+
+#dateInput:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+#generateBtn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+}
+
+#generateBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+#generateBtn:active {
+    transform: translateY(0);
+}
+
+.result-section {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.result-section h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.output {
+    font-size: 32px;
+    font-weight: bold;
+    color: #667eea;
+    margin-bottom: 20px;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+}
+
+#copyBtn {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+#copyBtn:hover {
+    background: #218838;
+}
+
+.error-section {
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.error-message {
+    color: #721c24;
+    font-size: 14px;
+    text-align: center;
+}
+
+.instructions {
+    background: #e9ecef;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: left;
+}
+
+.instructions h3 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.instructions ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.instructions li {
+    color: #555;
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.instructions li:before {
+    content: "•";
+    color: #667eea;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
+    margin-right: 0.5em;
+}
+
+/* 移动端优化 */
+@media (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
+    
+    .container {
+        padding: 20px;
+        border-radius: 15px;
+    }
+    
+    h1 {
+        font-size: 24px;
+    }
+    
+    .output {
+        font-size: 28px;
+    }
+    
+    #dateInput {
+        font-size: 16px;
+        padding: 12px;
+    }
+    
+    #generateBtn, #copyBtn {
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+}

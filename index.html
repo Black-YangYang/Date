@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生产日期编码生成器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>生产日期编码生成器</h1>
+        <div class="input-section">
+            <label for="dateInput">请输入生产日期 (YYYYMMDD):</label>
+            <input type="text" id="dateInput" placeholder="例如: 20251208" maxlength="8">
+            <button id="generateBtn">生成编码</button>
+        </div>
+        
+        <div class="result-section" id="resultSection" style="display: none;">
+            <h2>生成的编码:</h2>
+            <div class="output" id="output"></div>
+            <button id="copyBtn">复制编码</button>
+        </div>
+
+        <div class="error-section" id="errorSection" style="display: none;">
+            <p class="error-message" id="errorMessage"></p>
+        </div>
+
+        <div class="instructions">
+            <h3>使用说明:</h3>
+            <ul>
+                <li>输入格式: 8位数字 (YYYYMMDD)</li>
+                <li>输出格式: YYC-MMDDZ</li>
+                <li>月份映射: 1月=A, 2月=B, ..., 12月=L</li>
+                <li>年份校验: 个位数字 0-5→A, 6-9→S</li>
+                <li>日期校验: 1-8→A, 9-15→B, 16-21→C, 22-31→D</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

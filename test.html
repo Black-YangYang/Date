@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试 - 生产日期编码生成器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .test-case {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .test-input {
+            font-weight: bold;
+            color: #0066cc;
+        }
+        .test-expected {
+            color: #009900;
+        }
+        .test-actual {
+            color: #cc0000;
+        }
+        .test-result {
+            font-weight: bold;
+            margin-top: 5px;
+        }
+        .pass {
+            color: #009900;
+        }
+        .fail {
+            color: #cc0000;
+        }
+        .summary {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>生产日期编码生成器测试</h1>
+        <div id="testResults"></div>
+        <div class="summary" id="summary"></div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // 测试用例
+        const testCases = [
+            { input: "20251208", expected: "25A-L08A", description: "示例测试: 2025年12月8日" },
+            { input: "20230101", expected: "23A-A01A", description: "年初测试: 2023年1月1日" },
+            { input: "20231231", expected: "23A-L31D", description: "年末测试: 2023年12月31日" },
+            { input: "20240615", expected: "24A-F15B", description: "年中测试: 2024年6月15日" },
+            { input: "20250922", expected: "25A-I22D", description: "边界测试: 2025年9月22日" },
+            { input: "20261130", expected: "26S-K30D", description: "年份校验测试: 2026年11月30日" },
+            { input: "20270228", expected: "27S-B28D", description: "闰年测试: 2027年2月28日" },
+            { input: "20200808", expected: "20A-H08A", description: "2020年8月8日" },
+            { input: "20301225", expected: "30A-L25D", description: "2030年12月25日" }
+        ];
+
+        // 错误测试用例
+        const errorCases = [
+            { input: "20251301", expected: "月份错误", description: "无效月份测试: 13月" },
+            { input: "20250230", expected: "日期错误", description: "无效日期测试: 2月30日" },
+            { input: "2025", expected: "格式错误", description: "格式错误测试: 4位数字" },
+            { input: "2025128", expected: "格式错误", description: "格式错误测试: 7位数字" },
+            { input: "202512081", expected: "格式错误", description: "格式错误测试: 9位数字" },
+            { input: "abc", expected: "格式错误", description: "非数字输入测试" }
+        ];
+
+        // 测试函数
+        function runTests() {
+            const testResults = document.getElementById('testResults');
+            let passed = 0;
+            let failed = 0;
+
+            // 运行正常测试用例
+            testResults.innerHTML += '<h2>正常情况测试</h2>';
+            testCases.forEach(testCase => {
+                const result = testGenerateCode(testCase.input, testCase.expected);
+                testResults.innerHTML += createTestResultHTML(testCase, result);
+                if (result.passed) passed++;
+                else failed++;
+            });
+
+            // 运行错误测试用例
+            testResults.innerHTML += '<h2>错误情况测试</h2>';
+            errorCases.forEach(testCase => {
+                const result = testErrorCase(testCase.input, testCase.expected);
+                testResults.innerHTML += createTestResultHTML(testCase, result);
+                if (result.passed) passed++;
+                else failed++;
+            });
+
+            // 显示汇总结果
+            const summary = document.getElementById('summary');
+            summary.innerHTML = `测试完成: ${passed} 通过, ${failed} 失败, 总计 ${passed + failed} 个测试用例`;
+            summary.className = failed === 0 ? 'summary pass' : 'summary fail';
+        }
+
+        // 测试编码生成函数
+        function testGenerateCode(input, expected) {
+            try {
+                const validation = validateDate(input);
+                if (!validation.isValid) {
+                    return { passed: false, actual: "验证失败", error: "预期正常输入但验证失败" };
+                }
+                
+                const { year, month, day } = validation;
+                const actual = generateCode(year, month, day);
+                
+                return {
+                    passed: actual === expected,
+                    actual: actual,
+                    error: actual === expected ? "" : `预期: ${expected}, 实际: ${actual}`
+                };
+            } catch (error) {
+                return { passed: false, actual: "异常", error: error.message };
+            }
+        }
+
+        // 测试错误情况
+        function testErrorCase(input, expectedError) {
+            try {
+                const validation = validateDate(input);
+                return {
+                    passed: !validation.isValid,
+                    actual: validation.isValid ? "验证通过" : "验证失败",
+                    error: validation.isValid ? "预期验证失败但验证通过" : ""
+                };
+            } catch (error) {
+                return { passed: false, actual: "异常", error: error.message };
+            }
+        }
+
+        // 创建测试结果HTML
+        function createTestResultHTML(testCase, result) {
+            return `
+                <div class="test-case">
+                    <div><strong>${testCase.description}</strong></div>
+                    <div class="test-input">输入: ${testCase.input}</div>
+                    <div class="test-expected">预期: ${testCase.expected}</div>
+                    <div class="test-actual">实际: ${result.actual}</div>
+                    <div class="test-result ${result.passed ? 'pass' : 'fail'}">
+                        ${result.passed ? '✓ 通过' : '✗ 失败'} ${result.error ? '- ' + result.error : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        // 页面加载时运行测试
+        window.onload = runTests;
+    </script>
+</body>
+</html>
