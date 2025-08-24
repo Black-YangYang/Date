@@ -69,17 +69,17 @@
 
     <script src="script.js"></script>
     <script>
-        // 测试用例
+        // 测试用例 (假设产品类型为HCAP)
         const testCases = [
-            { input: "20251208", expected: "25A-L08A", description: "示例测试: 2025年12月8日" },
-            { input: "20230101", expected: "23A-A01A", description: "年初测试: 2023年1月1日" },
-            { input: "20231231", expected: "23A-L31D", description: "年末测试: 2023年12月31日" },
-            { input: "20240615", expected: "24A-F15B", description: "年中测试: 2024年6月15日" },
-            { input: "20250922", expected: "25A-I22D", description: "边界测试: 2025年9月22日" },
-            { input: "20261130", expected: "26S-K30D", description: "年份校验测试: 2026年11月30日" },
-            { input: "20270228", expected: "27S-B28D", description: "闰年测试: 2027年2月28日" },
-            { input: "20200808", expected: "20A-H08A", description: "2020年8月8日" },
-            { input: "20301225", expected: "30A-L25D", description: "2030年12月25日" }
+            { input: "20251208", expected: "SK-HCAP-25A-L08A", description: "示例测试: 2025年12月8日" },
+            { input: "20230101", expected: "SK-HCAP-23A-A01A", description: "年初测试: 2023年1月1日" },
+            { input: "20231231", expected: "SK-HCAP-23A-L31D", description: "年末测试: 2023年12月31日" },
+            { input: "20240615", expected: "SK-HCAP-24A-F15B", description: "年中测试: 2024年6月15日" },
+            { input: "20250922", expected: "SK-HCAP-25A-I22D", description: "边界测试: 2025年9月22日" },
+            { input: "20261130", expected: "SK-HCAP-26S-K30D", description: "年份校验测试: 2026年11月30日" },
+            { input: "20270228", expected: "SK-HCAP-27S-B28D", description: "闰年测试: 2027年2月28日" },
+            { input: "20200808", expected: "SK-HCAP-20A-H08A", description: "2020年8月8日" },
+            { input: "20301225", expected: "SK-HCAP-30A-L25D", description: "2030年12月25日" }
         ];
 
         // 错误测试用例
@@ -129,6 +129,9 @@
                 if (!validation.isValid) {
                     return { passed: false, actual: "验证失败", error: "预期正常输入但验证失败" };
                 }
+                
+                // 设置产品类型为HCAP以匹配测试用例
+                selectedProductType = "HCAP";
                 
                 const { year, month, day } = validation;
                 const actual = generateCode(year, month, day);
