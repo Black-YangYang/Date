@@ -31,8 +31,162 @@ h1 {
     font-weight: 600;
 }
 
+.product-type-section {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.product-type-section label {
+    display: block;
+    margin-bottom: 15px;
+    color: #555;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.product-buttons {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.product-btn {
+    background: #e9ecef;
+    border: 2px solid #ddd;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.product-btn:hover {
+    background: #dee2e6;
+    border-color: #adb5bd;
+}
+
+.product-btn.selected {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-color: #667eea;
+}
+
+.selected-product {
+    background: #28a745;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 600;
+    margin-top: 10px;
+}
+
 .input-section {
+    margin-bottom: 20px;
+}
+
+.batch-section {
     margin-bottom: 30px;
+}
+
+.batch-section label {
+    display: block;
+    margin-bottom: 10px;
+    color: #555;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+#quantityInput {
+    width: 100%;
+    padding: 15px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 18px;
+    text-align: center;
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease;
+}
+
+#quantityInput:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+#batchGenerateBtn {
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+}
+
+#batchGenerateBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+}
+
+#batchGenerateBtn:active {
+    transform: translateY(0);
+}
+
+
+.batch-result-section {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.batch-result-section h2 {
+    color: #333;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+.batch-output {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+
+.batch-code-item {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    font-family: 'Courier New', monospace;
+}
+
+.batch-code-item:last-child {
+    border-bottom: none;
+}
+
+#downloadBtn, #downloadBatchBtn {
+    background: #17a2b8;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#downloadBtn:hover, #downloadBatchBtn:hover {
+    background: #138496;
 }
 
 label {
@@ -197,4 +351,60 @@ label {
         padding: 12px 20px;
         font-size: 14px;
     }
+}
+
+/* 解码器特定样式 */
+.warranty-info {
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.warranty-valid {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.warranty-expired {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.warning-info {
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.warning {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+/* 解码器按钮样式 */
+#decodeBtn {
+    background: linear-gradient(135deg, #fd7e14 0%, #f76707 100%);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    width: 100%;
+}
+
+#decodeBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(253, 126, 20, 0.3);
+}
+
+#decodeBtn:active {
+    transform: translateY(0);
 }
